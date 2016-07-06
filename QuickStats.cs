@@ -45,7 +45,7 @@ namespace Oxide.Plugins
 		{
 			steamID = player.userID.ToString();
 			retrnUid = Config.Get<string>(steamID);
-			playerName = player.displayName;		
+			playerName = player.displayName;
 			woodCollected = 0;
 			stonesCollected = 0;
 			
@@ -59,6 +59,13 @@ namespace Oxide.Plugins
 						   
 			if(retrnUid != null)
 			{
+				//Update the players name in the config!
+				if(retrnUid != playerName)
+				{
+					Config[steamID] = playerName;
+					SaveConfig();
+				}
+				
 				woodFromCFG = Config.Get<int>(steamID + " Wood");
 				stonesFromCFG = Config.Get<int>(steamID + " Stones");
 			}
